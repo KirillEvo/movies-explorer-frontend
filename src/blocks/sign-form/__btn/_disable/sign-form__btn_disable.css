@@ -1,0 +1,4 @@
+.sign-form__btn_disable {
+  background-color: #2f2f2f;
+  cursor: not-allowed;
+}

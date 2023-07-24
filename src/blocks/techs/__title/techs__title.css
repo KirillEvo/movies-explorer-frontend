@@ -1,0 +1,26 @@
+.techs__title {
+  text-align: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  line-height: normal;
+  letter-spacing: -1.2px;
+  padding-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .techs__title {
+    padding-bottom: 22px;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+  }
+}
+
+@media (min-width: 992px) {
+  .techs__title {
+    padding-bottom: 26px;
+  }
+}

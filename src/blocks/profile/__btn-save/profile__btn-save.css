@@ -1,0 +1,17 @@
+.profile__btn-save {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 3px;
+  background: #000;
+  height: 45px;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+
+.profile__btn-save:hover {
+  opacity: 0.6;
+}

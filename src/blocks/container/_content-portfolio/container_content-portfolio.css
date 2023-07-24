@@ -1,0 +1,12 @@
+.container_content-portfolio {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+@media (min-width: 768px) {
+  .container_content-portfolio {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

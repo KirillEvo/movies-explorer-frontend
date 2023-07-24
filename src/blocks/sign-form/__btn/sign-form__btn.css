@@ -1,0 +1,21 @@
+.sign-form__btn {
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  border: 0;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+@media (min-width: 768px) {
+  .sign-form__btn {
+    font-size: 14px;
+  }
+}

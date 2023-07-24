@@ -1,0 +1,14 @@
+.techs__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, 84px);
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .techs__list {
+    grid-template-columns: repeat(7, 90px);
+  }
+}

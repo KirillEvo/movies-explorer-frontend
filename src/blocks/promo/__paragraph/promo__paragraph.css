@@ -1,0 +1,26 @@
+.promo__paragraph {
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.5;
+  margin: 0;
+  max-width: 260px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+@media (min-width: 550px) {
+  .promo__paragraph {
+    padding-bottom: 92px;
+  }
+}
+
+@media (min-width: 992px) {
+  .promo__paragraph {
+    padding-bottom: 146px;
+    text-align: left;
+  }
+}

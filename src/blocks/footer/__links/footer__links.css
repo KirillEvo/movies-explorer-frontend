@@ -1,0 +1,19 @@
+.footer__links {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 12px;
+  order: 0;
+}
+
+@media (min-width: 768px) {
+  .footer__links {
+    flex-direction: row;
+    gap: 20px;
+    order: 1;
+  }
+}

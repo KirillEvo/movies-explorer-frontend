@@ -1,0 +1,23 @@
+.header__nav-block {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: rgba(0,0,0,.5);
+  transform: translateX(100%);
+  z-index: 100;
+  overflow-x: hidden;
+  transition: 0.5s;
+  top: 0;
+  right: 0;
+}
+
+@media (min-width: 769px) {
+  .header__nav-block {
+    display: block;
+    transform: translateX(0%);
+    background: none;
+    height: 0%;
+    position: static;
+  }
+}

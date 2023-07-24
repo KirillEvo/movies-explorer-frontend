@@ -1,0 +1,5 @@
+.profile__form {
+  margin-top: 123px;
+  display: flex;
+  flex-direction: column;
+}

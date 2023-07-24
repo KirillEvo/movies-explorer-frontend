@@ -1,0 +1,21 @@
+.techs__item {
+  width: 84px;
+  height: 57px;
+  background-color: #E8E8E8;
+  border-radius: 10px;
+  margin: auto;
+  text-align: center;
+  line-height: 60px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.56px;
+}
+
+@media (min-width: 768px) {
+  .techs__item {
+    width: 90px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,123 @@
+.footer {
+  background-color: #fff;
+}
+
+.footer__container {
+  padding: 0 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.footer__paragraph {
+  padding-top: 79px;
+  margin: 0;
+  text-align: center;
+  color: #a0a0a0;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 20px;
+}
+
+.footer__hr {
+  height: 1px;
+  flex-shrink: 0;
+  background-color: #E8E8E8;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__date {
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  color: #A0A0A0;
+  order: 1;
+}
+
+.footer__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0 20px;
+  gap: 30px;
+}
+
+.footer__links {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 12px;
+  order: 0;
+}
+
+.footer__link {
+  text-align: right;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  color: #000;
+}
+
+@media (min-width: 576px) {
+  .footer__container {
+    max-width: 540px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer__container {
+    max-width: 668px;
+    padding: 0;
+  }
+  .footer__date {
+    font-size: 13px;
+    color: #000;
+    order: 0;
+  }
+  .footer__block {
+    padding: 20px 0;
+    flex-direction: row;
+    gap: 0;
+  }
+  .footer__links {
+    flex-direction: row;
+    gap: 20px;
+    order: 1;
+  }
+  .footer__link {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer__container {
+    max-width: 960px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer__container {
+    max-width: 1140px;
+    padding: 0;
+  }
+}

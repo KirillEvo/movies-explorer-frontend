@@ -1,0 +1,19 @@
+.promo__img {
+  width: 210px;
+  height: 206px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 550px) {
+  .promo__img {
+    order: 0;
+    width: 310px;
+    height: 304px;
+  }
+}
+
+@media (min-width: 992px) {
+  .promo__img {
+    order: 1;
+  }
+}

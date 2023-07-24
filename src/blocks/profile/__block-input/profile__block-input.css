@@ -1,0 +1,5 @@
+.profile__block-input {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}

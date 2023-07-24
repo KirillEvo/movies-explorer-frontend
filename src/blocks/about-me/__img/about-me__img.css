@@ -1,0 +1,23 @@
+.about-me__img {
+  width: 292px;
+  height: 352px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 10px;
+  order: 0;
+}
+
+@media (min-width: 768px) {
+  .about-me__img {
+    width: 255px;
+    height: 307px;
+    order: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .about-me__img {
+    width: 270px;
+    height: 327px;
+  }
+}

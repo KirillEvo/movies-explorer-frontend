@@ -1,0 +1,15 @@
+.profile {
+  margin: 70px 0 40px;
+}
+
+@media (min-width: 768px) {
+  .profile {
+    margin: 236px 0 269px;
+  }
+}
+
+@media (min-width: 992px) {
+  .profile {
+    margin: 74px 0 70px;
+  }
+}

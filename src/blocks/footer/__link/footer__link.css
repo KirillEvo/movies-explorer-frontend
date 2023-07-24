@@ -1,0 +1,17 @@
+.footer__link {
+  text-align: right;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .footer__link {
+    font-size: 13px;
+  }
+}
