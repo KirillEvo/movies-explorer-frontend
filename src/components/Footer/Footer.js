@@ -9,8 +9,8 @@ export default function Footer() {
         <div className="footer__block">
           <p className="footer__date">© 2023</p>
           <ul className="footer__links">
-            <li><a className="footer__link" href="https://practicum.yandex.ru/">Яндекс.Практикум</a></li>
-            <li><a className="footer__link" href="https://github.com/KirillEvo">Github</a></li>
+            <li><a target='_blank' className="footer__link" href="https://practicum.yandex.ru/" rel="noreferrer">Яндекс.Практикум</a></li>
+            <li><a target='_blank' className="footer__link" href="https://github.com/KirillEvo" rel="noreferrer">Github</a></li>
           </ul>
         </div>
       </div>

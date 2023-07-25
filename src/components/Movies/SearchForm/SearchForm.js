@@ -7,7 +7,7 @@ export default function SearchForm() {
       <div className='search__container'>
         <form className='search__form'>
           <div className='search__block'>
-            <input className='search__input'></input>
+            <input className='search__input' placeholder='Фильм'></input>
             <button className='search__btn'></button>
           </div>
           <label className="toggle">

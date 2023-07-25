@@ -7,7 +7,7 @@ function Header({ loggedIn }) {
   return (
     <header className="header">
       <Link to="/">
-        <img className="header__logo" src={Logo} alt="Logo" />
+        <img className="header__logo" src={Logo} alt="Логотип сайта" />
       </Link>
       <Navigation loggedIn={loggedIn} />
     </header>

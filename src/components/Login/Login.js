@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../utils/hooks/validationForm";
 import { Link } from "react-router-dom";
-// import './Login.css';
+import './Login.css';
 
 export default function Login(props) {
   const inputValid = useFormWithValidation();
@@ -19,47 +19,47 @@ export default function Login(props) {
   };
 
   return (
-    <section className="sign-form">
-      <form className="sign-form__container">
-        <div className="sign-form__top">
+    <section className="sign-login">
+      <form className="sign-login__container">
+        <div className="sign-login__top">
           <Link to="/">
-            <img className="logotype" src={Logo} alt="Logotype" />
+            <img className="logotype" src={Logo} alt="Логотип" />
           </Link>
-          <h1 className="sign-form__title">Рады видеть!</h1>
+          <h1 className="sign-login__title">Рады видеть!</h1>
         </div>
-        <div>
-          <label className="sign-form__label" htmlFor="email">
+        <div className="sign-login__block-input">
+          <label className="sign-login__label" htmlFor="email">
             E-mail
             <input
               required
-              className="sign-form__input"
+              className="sign-login__input"
               value={inputValid?.values?.email || ""}
               onChange={inputValid.handleChange}
               name="email"
               type="email"
             />
-            <span className="sign-form__span">{email}</span>
+            <span className="sign-login__span">{email}</span>
           </label>
-          <label className="sign-form__label" htmlFor="password">
+          <label className="sign-login__label" htmlFor="password">
             Пароль
             <input
               required
-              className="sign-form__input"
+              className="sign-login__input"
               value={inputValid?.values?.password || ""}
               onChange={inputValid.handleChange}
               name="password"
               type="password"
             />
-            <span className="sign-form__span">{password}</span>
+            <span className="sign-login__span">{password}</span>
           </label>
         </div>
-        <div className="sign-form__height"></div>
-        <button className={`sign-form__btn ${!inputValid.isValid && 'sign-form__btn_disable'}`} onClick={handleSubmit} type="submit" disabled={!inputValid.isValid && 'disabled'}>
+        <span className="sign-login__height"></span>
+        <button className={`sign-login__btn ${!inputValid.isValid && 'sign-login__btn_disable'}`} onClick={handleSubmit} type="submit" disabled={!inputValid.isValid && 'disabled'}>
           Войти
         </button>
-        <div className="sign-form__bottom">
-          <p className="sign-form__bottom-text">Ещё не зарегистрированы?</p>
-          <Link className="sign-form__bottom-link" to="/signup">
+        <div className="sign-login__bottom">
+          <p className="sign-login__bottom-text">Ещё не зарегистрированы?</p>
+          <Link className="sign-login__bottom-link" to="/signup">
             Регистрация
           </Link>
         </div>

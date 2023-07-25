@@ -26,7 +26,7 @@ export default function Registe(props) {
           <Link to='/'><img className="logotype" src={Logo} alt="Logotype" /></Link>
           <h1 className="sign-form__title">Добро пожаловать!</h1>
         </div>
-        <div>
+        <div className="sign-form__block-input">
           <label className="sign-form__label" htmlFor="name">
             Имя
             <input

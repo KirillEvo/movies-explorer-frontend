@@ -1,161 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
-import pic1 from '../../../images/pic1.png'
-import pic2 from '../../../images/pic2.png'
-import pic3 from '../../../images/pic3.png'
+export default function MoviesCardList({ location }) {
+  const [cardCount, setCardCount] = useState(0);
+  const [cardCountSave, setCardCountSave] = useState(0);
 
+  useEffect(() => {
+    function handleResize() {
+      const screenWidth = window.innerWidth;
 
-export default function MoviesCardList() {
+      if (screenWidth > 992) {
+        setCardCount(12);
+        setCardCountSave(3);
+      } else if (screenWidth > 767) {
+        setCardCount(8);
+        setCardCountSave(3);
+      } else {
+        setCardCount(5);
+        setCardCountSave(2);
+      }
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <section className='movies-list'>
-      <div className='movies-list__content'>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic1} alt="pic1"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>33 слова о дизайне</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-saved'></button>
-            <a href="/">
-              <img className='movies-list__img' src={pic2} alt="pic2"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>Киноальманах «100 лет дизайна»</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
-        <article className='movies-list__article'>
-          <div className='movies-list__card'>
-            <button className='movies-list__btn-save'>Сохранить</button>
-            <a href="/">
-              <img className='movies-list__img' src={pic3} alt="pic3"/>
-            </a>
-          </div>
-          <div className='movies-list__info'>
-            <p className='movies-list__text'>В погоне за Бенкси</p>
-            <p className='movies-list__hours'>1ч 17м</p>
-          </div>
-        </article>
+      <div className={'movies-list__content ' + (!location ? 'movies-list__content_saved' : '')}>
+      {location ? Array.from({ length: cardCount }, (_, index) => (
+          <MoviesCard key={index} />
+        )) : Array.from({ length: cardCountSave }, (_, index) => (
+          <MoviesCard key={index} />
+        )) }
+
       </div>
-      <button className='movies-list__more'>Ещё</button>
+      {!location ? '' : <button className='movies-list__more'>Ещё</button> }
+
     </section>
   )
 }

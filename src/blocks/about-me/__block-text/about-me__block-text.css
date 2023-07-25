@@ -1,8 +1,0 @@
-.about-me__block-text {
-  order: 1;
-}
-@media (min-width: 768px) {
-  .about-me__block-text {
-  order: 0;
-  }
-}

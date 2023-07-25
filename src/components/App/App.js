@@ -9,8 +9,8 @@ import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import PageNotFound from "../PageNotFound/PageNotFound";
 
-import AuthApi from "../../utils/authApi";
-import Api from '../../utils/api';
+import MainApi from '../../utils/MainApi';
+import MoviesApi from "../../utils/MoviesApi";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -21,41 +21,47 @@ import Preloader from '../Preloader/Preloader';
 function App() {
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState();
   const [error, setError] = useState("");
   const [preload, setPreload] = useState(false);
 
+
+
+  // Проверка jwt, если приходит then значит в куки он есть
   function handleTokenCheck() {
-    AuthApi.token()
+    MainApi.token()
       .then((user) => {
         setLoggedIn(true);
       })
       .catch((err) => console.log(err));
   }
 
-  useEffect(() => {
-    handleTokenCheck();
-  });
+  // useEffect(() => {
+  //   handleTokenCheck();
+  // });
 
-  useEffect(() => {
-    if (loggedIn) {
-      Promise.all([Api.getUserInfo()])
-      .then((values) => {
-        const [userData] = values;
-        setCurrentUser(userData);
-      })
-      .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
+  // Если токен есть - получаем данные пользователя
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     Promise.all([MainApi.getUserInfo()])
+  //     .then((values) => {
+  //       const [userData] = values;
+  //       setCurrentUser(userData);
+  //     })
+  //     .catch((err) => console.log(err));
+  //   }
+  // }, [loggedIn]);
 
+  // Сброс ошибок в формах
   const clearError = () => {
     setTimeout(() => setError(""), 10000);
   };
 
+  // Регистрация пользователя
   function userRegistration(data) {
     setPreload(true);
-    AuthApi.register(data.name, data.email, data.password)
+    MainApi.register(data.name, data.email, data.password)
       .then((data) => {
         console.log(data);
         navigate("/signin", { replace: true });
@@ -74,9 +80,10 @@ function App() {
       });
   }
 
+  // Авторизация пользователя
   function userLogin(dataUser) {
     setPreload(true);
-    AuthApi.login(dataUser.email, dataUser.password)
+    MainApi.login(dataUser.email, dataUser.password)
       .then((data) => {
         if (data) {
           console.log(data);
@@ -92,20 +99,23 @@ function App() {
       })
   }
 
+  // Удаление jwt из куки (выход)
   function signOut(){
-    setPreload(true);
-    AuthApi.signOut()
-    .then(() => {
-      setLoggedIn(false);
-      navigate("/", { replace: false });
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {setPreload(false);})
+    navigate("/");
+    // setPreload(true);
+    // MainApi.signOut()
+    // .then(() => {
+    //   setLoggedIn(false);
+    //   navigate("/");
+    // })
+    // .catch((err) => console.log(err))
+    // .finally(() => {setPreload(false);})
   }
 
+  // Редактирование данных пользователя
   function handleUpdateUser(data) {
     setPreload(true);
-    Api.updateUserData(data)
+    MainApi.updateUserData(data)
       .then((res) => {
         setCurrentUser(res);
       })
@@ -117,6 +127,21 @@ function App() {
       })
   }
 
+  // Получение всех карточек
+  function getMovies () {
+    MoviesApi.getMovies()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
+  }
+
+  // useEffect(() => {
+  //   getMovies();
+  // })
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
@@ -124,41 +149,41 @@ function App() {
         <Route
           path="/signup"
           element={
-            <ProtectedRoute loggedIn={!loggedIn}>
+            //<ProtectedRoute loggedIn={!loggedIn}>
               <Register onRegister={userRegistration} error={error} />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           }
         ></Route>
         <Route
           path="/signin"
           element={
-            <ProtectedRoute loggedIn={!loggedIn}>
+            //<ProtectedRoute loggedIn={!loggedIn}>
               <Login onLogin={userLogin} />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           }
         ></Route>
         <Route
           path="/profile"
           element={
-            <ProtectedRoute loggedIn={loggedIn}>
+            //<ProtectedRoute loggedIn={loggedIn}>
               <Profile loggedIn={loggedIn} signOut={signOut} onUpdateUser={handleUpdateUser}/>
-            </ProtectedRoute>
+            //</ProtectedRoute>
           }
         />
         <Route
           path="/movies"
           element={
-            <ProtectedRoute loggedIn={loggedIn}>
-              <Movies loggedIn={loggedIn} />
-            </ProtectedRoute>
+            //<ProtectedRoute loggedIn={loggedIn}>
+              <Movies location={true} loggedIn={loggedIn} />
+            //</ProtectedRoute>
           }
         />
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies loggedIn={loggedIn} />
-            </ProtectedRoute>
+            // <ProtectedRoute loggedIn={loggedIn}>
+              <SavedMovies location={false} loggedIn={loggedIn} />
+            // </ProtectedRoute>
           }
         />
         <Route path="*" element={<PageNotFound />}></Route>

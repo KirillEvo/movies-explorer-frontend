@@ -1,6 +1,0 @@
-.header__nav-block_open {
-  display: flex;
-  position: fixed;
-  transform: translateX(0%);
-  justify-content: flex-end;
-}

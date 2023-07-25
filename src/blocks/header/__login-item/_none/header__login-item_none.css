@@ -1,9 +1,0 @@
-.header__login-item_none {
-  display: block;
-}
-
-@media (min-width: 769px) {
-  .header__login-item_none {
-    display: none;
-  }
-}

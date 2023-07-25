@@ -4,7 +4,7 @@
   padding: 16px 14px;
   margin-right: auto;
   margin-left: auto;
-  gap: 44px;
+  gap: 29px;
   justify-content: space-between;
 }
 
@@ -14,13 +14,21 @@
 }
 
 .header__burger {
-  width: 44px;
-  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
   border: 0;
-  background-color: initial;
-  background-image: url('../../images/burger.svg');
-  display: block;
   cursor: pointer;
+  background: none;
+}
+
+.header__line {
+  height: 3px;
+  width: 22px;
+  background: black;
 }
 
 .header__nav {
@@ -36,7 +44,6 @@
   background: rgba(0,0,0,.5);
   transform: translateX(100%);
   z-index: 100;
-  overflow-x: hidden;
   transition: 0.5s;
   top: 0;
   right: 0;
@@ -55,8 +62,8 @@
 
 .header__btn-close {
   position: absolute;
-  top: 22.44px;
-  right: 22.44px;
+  top: 13.44px;
+  right: 13.44px;
   width: 32px;
   height: 32px;
   border: 0;
@@ -69,14 +76,12 @@
 
 .header__btn-login {
   font-family: "Inter", Arial, sans-serif;
-  padding: 8px 20px;
+  padding: 7px 12px;
   color: #fff;
-  height: 32px;
-  flex-shrink: 0;
   border-radius: 3px;
   background-color: #000;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
@@ -85,7 +90,7 @@
 .header__register {
   color: #000;
   font-family: 'Inter', Arial, sans-serif;
-  font-size: 12px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
@@ -97,7 +102,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  gap: 30px;
+  gap: 14px;
 }
 
 .header__nav-login {
@@ -107,7 +112,7 @@
   justify-content: space-between;
   background: #fff;
   flex-direction: column;
-  padding: 159px 0 92px;
+  padding: 147px 0 125px;
 }
 
 .header__list-login {
@@ -115,16 +120,20 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 16px;
+  gap: 24px;
   flex-direction: column;
   align-items: center;
+}
+
+.header__list-item {
+  padding-bottom: 3px;
 }
 
 .header__login-item {
   color: #000;
   text-align: right;
   font-family: 'Inter', Arial, sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
@@ -132,7 +141,8 @@
 }
 
 .header__login-item_active {
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #000;
+  padding-bottom: 8px;
 }
 
 .header__login-link {
@@ -175,12 +185,42 @@
   .header {
     max-width: 540px;
   }
+  .header__btn-login {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+  .header__register {
+    font-size: 12px;
+  }
+  .header__list {
+    gap: 30px;
+  }
+  .header__burger {
+    gap: 7px;
+    width: 44px;
+  }
+  .header__line {
+    width: 28px;
+  }
+  .header__btn-close {
+    top: 22.44px;
+    right: 22.44px;
+  }
+  .header__nav-login {
+    padding: 162px 0 125px;
+  }
+  .header__list-login {
+    gap: 28px;
+  }
+  .header__login-item_active {
+    padding-bottom: 5px;
+  }
 }
 
 @media (min-width: 708px) {
   .header {
     max-width: 708px;
-
+    padding: 16px 0px;
   }
 }
 
@@ -210,6 +250,12 @@
   .header__login-item_active {
     border-bottom: none;
   }
+  .header__list-item {
+    padding-bottom: 0;
+  }
+  .header__login-item {
+    font-size: 13px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -221,5 +267,6 @@
 @media (min-width: 1200px) {
   .header {
     max-width: 1140px;
+    padding: 16px 0px;
   }
 }

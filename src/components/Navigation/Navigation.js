@@ -16,7 +16,11 @@ export default function Navigation({ loggedIn }) {
   return (
     <>
       {loggedIn ? (
-        <button onClick={openMenu} className="header__burger"></button>
+        <button onClick={openMenu} className="header__burger">
+          <span className="header__line"></span>
+          <span className="header__line"></span>
+          <span className="header__line"></span>
+        </button>
       ) : (
         ""
       )}
@@ -33,7 +37,7 @@ export default function Navigation({ loggedIn }) {
           )}
           <nav className="header__nav-login">
             <ul className="header__list-login">
-              <li>
+              <li className="header__list-item">
                 <CustomLink
                   className={
                     "header__login-item_none header__login-item header__login-item"
@@ -43,7 +47,7 @@ export default function Navigation({ loggedIn }) {
                   Главная
                 </CustomLink>
               </li>
-              <li>
+              <li className="header__list-item">
                 <CustomLink
                   className={
                     'header__login-item header__login-item'
@@ -53,7 +57,7 @@ export default function Navigation({ loggedIn }) {
                   Фильмы
                 </CustomLink>
               </li>
-              <li>
+              <li className="header__list-item">
                 <CustomLink
                   className={
                     'header__login-item header__login-item'

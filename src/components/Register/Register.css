@@ -5,10 +5,14 @@
 .sign-form__container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-width: 396px;
+  /* min-height: 100vh; */
+  max-width: 455px;
   margin: 0 auto;
   padding: 56px 30px 30px 30px;
+}
+
+.sign-form__block-input {
+  padding-bottom: 141px;
 }
 
 .sign-form__title {
@@ -91,8 +95,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 50px;
-  padding-bottom: 40px;
+  gap: 47px;
+  padding-bottom: 80px;
 }
 
 .sign-form__bottom {
@@ -135,7 +139,8 @@
   }
   .sign-form__top {
     align-items: flex-start;
-    gap: 40px;
+    gap: 36px;
+    padding-bottom: 40px;
   }
   .sign-form__bottom {
     gap: 6px;
@@ -145,6 +150,9 @@
   }
   .sign-form__bottom-link {
     font-size: 14px;
+  }
+  .sign-form__block-input {
+    padding-bottom: 54px;
   }
 }
 
