@@ -35,7 +35,7 @@ export default function Profile(props) {
       <main>
         <section className="profile">
           <div className="profile__container">
-            <h1 className="profile__title">Привет, Виталий!</h1>
+            <h1 className="profile__title">Привет, {currentUser.name}!</h1>
             <form className="profile__form">
               <div className="profile__form-block">
                 <div className="profile__block-input">
@@ -46,7 +46,7 @@ export default function Profile(props) {
                     minLength="2"
                     maxLength="30"
                     disabled={!editingActivated && "disabled"}
-                    //placeholder={currentUser.name}
+                    placeholder={currentUser.name}
                     value={inputValid?.values?.name || ""}
                     onChange={inputValid.handleChange}
                     type="text"
@@ -60,7 +60,7 @@ export default function Profile(props) {
                     required
                     className="profile__input profile__input_border"
                     disabled={!editingActivated && "disabled"}
-                    // placeholder={currentUser.email}
+                    placeholder={currentUser.email}
                     value={inputValid?.values?.email || ""}
                     onChange={inputValid.handleChange}
                     type="email"

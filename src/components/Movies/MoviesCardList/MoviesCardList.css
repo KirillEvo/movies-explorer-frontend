@@ -9,6 +9,7 @@
 }
 
 .movies-list__content {
+  width: 100%;
   padding-top: 48px;
   padding-bottom: 63px;
   display: grid;
@@ -29,6 +30,10 @@
 
 .movies-list__card:hover .movies-list__btn-save {
   opacity: 1;
+}
+
+.movies-list__link {
+  width: 100%;
 }
 
 .movies-list__btn-save {
@@ -123,7 +128,8 @@
 
 .movies-list__img {
   width: 100%;
-  height: auto;
+  height: 168px;
+  object-fit: cover;
 }
 .movies-list__content_saved {
   padding-bottom: 152px;
@@ -165,6 +171,9 @@
   .movies-list__content_saved {
     padding-bottom: 175px;
   }
+  .movies-list__img {
+    height: 190px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -187,6 +196,9 @@
   }
   .movies-list__content_saved {
     padding-bottom: 240px;
+  }
+  .movies-list__img {
+    height: 201px;
   }
 }
 

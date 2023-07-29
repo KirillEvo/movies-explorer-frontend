@@ -1,19 +1,59 @@
-import React from 'react'
-import pic1 from '../../../images/pic1.png'
+import React, { useEffect } from "react";
 
-export default function MoviesCard() {
+export default function MoviesCard({
+  movie,
+  handleSaveMovie,
+  deleteSavedMovies,
+  checkingSavedMovies,
+}) {
+  const url = "https://api.nomoreparties.co/";
+
+  const duration = (duration) => {
+    const hours = Math.trunc(duration / 60);
+    const min = duration % 60;
+    if (hours === 0) {
+      return `${min}м`;
+    } else {
+      return `${hours}ч ${min}м`;
+    }
+  };
+
+  const handleSave = () => {
+    handleSaveMovie(movie);
+  };
+
+  const handleDelete = () => {
+    deleteSavedMovies(movie);
+  };
+
+  useEffect(() => {
+  }, [checkingSavedMovies])
+
   return (
-    <article className='movies-list__article'>
-      <div className='movies-list__card'>
-        <button className='movies-list__btn-save'>Сохранить</button>
-        <a href="/">
-          <img className='movies-list__img' src={pic1} alt="Изображение фильма"/>
+    <article className="movies-list__article">
+      <div className="movies-list__card">
+        <button onClick={checkingSavedMovies ? handleDelete : handleSave} className={checkingSavedMovies ? 'movies-list__btn-saved' : 'movies-list__btn-save'}>
+          {checkingSavedMovies ? '' : 'Сохранить'}
+        </button>
+        {/* {checkingSavedMovies ? (
+          <button className="movies-list__btn-saved"></button>
+        ) : (
+          <button onClick={handleSave} className="movies-list__btn-save">
+            Сохранить
+          </button>
+        )} */}
+        <a className="movies-list__link" href={movie.trailerLink}>
+          <img
+            className="movies-list__img"
+            src={movie.image.url ? url + movie.image.url : movie.image}
+            alt={movie.nameRu}
+          />
         </a>
       </div>
-      <div className='movies-list__info'>
-        <h2 className='movies-list__text'>33 слова о дизайне</h2>
-        <p className='movies-list__hours'>1ч 17м</p>
+      <div className="movies-list__info">
+        <h2 className="movies-list__text">{movie.nameRU}</h2>
+        <p className="movies-list__hours">{duration(movie.duration)}</p>
       </div>
     </article>
-  )
+  );
 }

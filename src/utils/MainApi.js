@@ -1,3 +1,5 @@
+const apiUrl = 'https://api.nomoreparties.co';
+
 class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -49,6 +51,43 @@ class MainApi {
   token() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
+      headers: this._headers
+    }).then(res => this._checkResponse(res))
+  }
+
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: this._headers
+    }).then(res => this._checkResponse(res))
+  }
+
+  setMovie(data) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        country : data.country,
+        director : data.director,
+        duration : data.duration,
+        year : data.year,
+        description : data.description,
+        image : apiUrl + data.image.url,
+        trailerLink : data.trailerLink,
+        thumbnail : apiUrl + data.image.formats.thumbnail.url,
+        movieId : data.id,
+        nameRU : data.nameRU,
+        nameEN : data.nameEN,
+      })
+    }).then(res => this._checkResponse(res))
+  }
+
+  delMovie(movie) {
+    return fetch(`${this._baseUrl}/movies/${movie}`, {
+      method: 'DELETE',
       credentials: 'include',
       headers: this._headers
     }).then(res => this._checkResponse(res))

@@ -120,6 +120,16 @@
   border: 1px solid #E8E8E8;
 }
 
+.search__error {
+  text-align: center;
+  color: #ff4062;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
 @media (min-width: 576px) {
   .search {
     max-width: 540px;
