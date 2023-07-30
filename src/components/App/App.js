@@ -26,28 +26,31 @@ function App() {
   const [preload, setPreload] = useState(false);
 
   // Проверка jwt, если приходит then значит в куки он есть
-  function handleTokenCheck() {
+  useEffect(() => {
     MainApi.token()
       .then((user) => {
         setLoggedIn(true);
+        if (loggedIn) {
+          MainApi.getUserInfo()
+            .then((userData) => {
+              setCurrentUser(userData);
+            })
+            .catch((err) => console.log(err));
+        }
       })
       .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    handleTokenCheck();
   }, [loggedIn]);
 
   // Если токен есть - получаем данные пользователя
-  useEffect(() => {
-    if (loggedIn) {
-      MainApi.getUserInfo()
-        .then((userData) => {
-          setCurrentUser(userData);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     MainApi.getUserInfo()
+  //       .then((userData) => {
+  //         setCurrentUser(userData);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [loggedIn]);
 
   // Сброс ошибок в формах
   const clearError = () => {
@@ -55,11 +58,13 @@ function App() {
   };
 
   // Регистрация пользователя
-  function userRegistration(data) {
+  function userRegistration(user) {
     setPreload(true);
-    MainApi.register(data.name, data.email, data.password)
+    MainApi.register(user.name, user.email, user.password)
       .then((data) => {
-        navigate("/signin", { replace: true });
+        console.log(data.password);
+        userLogin({ email: user.email, password: user.password });
+        navigate("/movies", { replace: true });
       })
       .catch((err) => {
         console.log(`${err}`);
@@ -77,12 +82,13 @@ function App() {
 
   // Авторизация пользователя
   function userLogin(dataUser) {
+    console.log(dataUser);
     setPreload(true);
     MainApi.login(dataUser.email, dataUser.password)
       .then((data) => {
         if (data) {
           setLoggedIn(true);
-          navigate("/", { replace: true });
+          navigate("/movies", { replace: true });
         }
       })
       .catch((err) => {
@@ -100,6 +106,7 @@ function App() {
     MainApi.signOut()
       .then(() => {
         setLoggedIn(false);
+        setCurrentUser({})
         navigate("/");
         localStorage.clear();
       })
@@ -156,18 +163,18 @@ function App() {
     setQueryMovies(moviesQuery);
     setShortMovies(filterShortMovies(moviesQuery));
     localStorage.setItem(
-      `${currentUser.email} - moviesQuery`,
+      `moviesQuery`,
       JSON.stringify(moviesQuery)
     );
     localStorage.setItem(
-      `${currentUser.email} - shortMovies`,
+      `shortMovies`,
       JSON.stringify(filterShortMovies(moviesQuery))
     );
   }
 
   // Поиск фильмов
   function handleSearchSubmit(inputValue) {
-    localStorage.setItem(`${currentUser.email} - queryUser`, inputValue);
+    localStorage.setItem(`queryUser`, inputValue);
     MoviesApi.getMovies()
       .then((movies) => {
         //setMovies(movies);
@@ -185,32 +192,32 @@ function App() {
   // Переключатель состояния чекбокса короткометражек
   function handleChecked(value) {
     setChecked(value);
-    localStorage.setItem(`${currentUser.email} - checkbox`, value);
+    localStorage.setItem(`checkbox`, value);
   }
 
   // Монтирование фильмов в локалку, отслеживает состояние
   useEffect(() => {
     if (currentUser && currentUser.email) {
-      if (localStorage.getItem(`${currentUser.email} - moviesQuery`)) {
+      if (localStorage.getItem(`moviesQuery`)) {
         const localShortMovies = JSON.parse(
-          localStorage.getItem(`${currentUser.email} - moviesQuery`)
+          localStorage.getItem(`moviesQuery`)
         );
         setQueryMovies(localShortMovies);
 
-        if (localStorage.getItem(`${currentUser.email} - shortMovies`)) {
+        if (localStorage.getItem(`shortMovies`)) {
           const localQueryMovies = JSON.parse(
-            localStorage.getItem(`${currentUser.email} - shortMovies`)
+            localStorage.getItem(`shortMovies`)
           );
           setShortMovies(localQueryMovies);
         }
-        if (localStorage.getItem(`${currentUser.email} - queryUser`)) {
+        if (localStorage.getItem(`queryUser`)) {
           const localQueryUser = localStorage.getItem(
-            `${currentUser.email} - queryUser`
+            `queryUser`
           );
           setQueryUser(localQueryUser);
         }
         if (
-          localStorage.getItem(`${currentUser.email} - checkbox`) === "true"
+          localStorage.getItem(`checkbox`) === "true"
         ) {
           setChecked(true);
         } else {
@@ -229,7 +236,7 @@ function App() {
   // Переключатель состояния чекбокса короткометражек
   function handleCheckedSave(value) {
     setIsChekedSave(value);
-    localStorage.setItem(`${currentUser.email} - checkboxSave`, value);
+    localStorage.setItem(`checkboxSave`, value);
   }
   // Фильтрация фильмов из моего апи
   function filterSavedMovies(movies, query) {
@@ -249,11 +256,11 @@ function App() {
     setSavedMovies(moviesQuery);
     setShortSavedMovies(filterShortMovies(moviesQuery));
     localStorage.setItem(
-      `${currentUser.email} - moviesSaved`,
+      `moviesSaved`,
       JSON.stringify(moviesQuery)
     );
     localStorage.setItem(
-      `${currentUser.email} - shortMoviesSaved`,
+      `shortMoviesSaved`,
       JSON.stringify(filterShortMovies(moviesQuery))
     );
   }
@@ -316,7 +323,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
+        <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route
           path="/signup"
           element={
@@ -389,7 +396,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<PageNotFound />}></Route>
+        <Route  path="*" element={<PageNotFound />}></Route>
       </Routes>
       <Preloader isOpen={preload} />
     </CurrentUserContext.Provider>

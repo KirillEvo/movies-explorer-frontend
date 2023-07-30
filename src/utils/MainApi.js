@@ -99,8 +99,8 @@ class MainApi {
 };
 
 const api = new MainApi({
-  baseUrl: 'https://api.dip.nomoredomains.xyz',
-  // baseUrl: 'http://localhost:4444',
+  // baseUrl: 'https://api.dip.nomoredomains.xyz',
+  baseUrl: 'http://localhost:4444',
   headers: {
     'Content-Type': 'application/json'
   }
