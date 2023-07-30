@@ -56,12 +56,11 @@ function App() {
     setPreload(true);
     MainApi.register(user.name, user.email, user.password)
       .then((data) => {
-        console.log(data.password);
         userLogin({ email: user.email, password: user.password });
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(err.status);
+        console.log(err);
         setError(
           err.status === 409
             ? "Пользователь с таким email уже зарегистрирован"
@@ -76,7 +75,6 @@ function App() {
 
   // Авторизация пользователя
   function userLogin(dataUser) {
-    console.log(dataUser);
     setPreload(true);
     MainApi.login(dataUser.email, dataUser.password)
       .then((data) => {

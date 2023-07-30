@@ -12,13 +12,13 @@ export default function Profile(props) {
   const { name, email } = inputValid.errors;
 
   const [editingActivated, setEditingActivated] = useState(false);
-  const [isAnyFieldFilled, setIsAnyFieldFilled] = useState(false);
+  // const [isAnyFieldFilled, setIsAnyFieldFilled] = useState(false);
 
-  useEffect(() => {
-    // Проверяем, заполнено ли хотя бы одно поле
-    const isFieldFilled = inputValid.values.name || inputValid.values.email;
-    setIsAnyFieldFilled(isFieldFilled);
-  }, [inputValid.values]);
+  // useEffect(() => {
+  //   // Проверяем, заполнено ли хотя бы одно поле
+  //   const isFieldFilled = inputValid.values.name || inputValid.values.email;
+  //   setIsAnyFieldFilled(isFieldFilled);
+  // }, [inputValid.values]);
 
   const handleEditing = (evt) => {
     evt.preventDefault();
@@ -35,6 +35,8 @@ export default function Profile(props) {
     inputValid.resetForm();
     setEditingActivated(false);
   };
+
+  const Validity = (!inputValid.isValid || (currentUser.name === inputValid.values.name && currentUser.email === inputValid.values.email));
 
   return (
     <>
@@ -79,12 +81,12 @@ export default function Profile(props) {
               <span className="profile__span-props-message">{props.message}</span>
               <span className="profile__span-props-error">{props.error}</span>
               {editingActivated ? (
-                <button
-              className={`profile__btn-save ${
-                (!inputValid.isValid || !isAnyFieldFilled) && 'profile__btn-save_disable'
+
+            <button
+              className={`profile__btn-save ${Validity ? 'profile__btn-save_disable' : ''}
               }`}
               onClick={handleSubmit}
-              disabled={!inputValid.isValid || !isAnyFieldFilled}
+              disabled={Validity ? true : false}
             >
               Сохранить
             </button>
