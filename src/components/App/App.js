@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useHistory, useLocation } from "react-router-dom";
 import "./App.css";
 
 import Main from "../Main/Main";
@@ -20,38 +20,33 @@ import Preloader from "../Preloader/Preloader";
 
 function App() {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const location = useLocation();
+  const path = location.pathname;
   const [currentUser, setCurrentUser] = useState({});
   const [error, setError] = useState("");
   const [preload, setPreload] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  console.log(loggedIn);
   // Проверка jwt, если приходит then значит в куки он есть
   useEffect(() => {
     MainApi.token()
       .then((user) => {
         setLoggedIn(true);
+        navigate(path);
         if (loggedIn) {
           MainApi.getUserInfo()
             .then((userData) => {
               setCurrentUser(userData);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(() => setIsLoading(false));
+        } else {
+          setIsLoading(false);
         }
       })
       .catch((err) => console.log(err));
   }, [loggedIn]);
-
-  // Если токен есть - получаем данные пользователя
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     MainApi.getUserInfo()
-  //       .then((userData) => {
-  //         setCurrentUser(userData);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [loggedIn]);
-
   // Сброс ошибок в формах
   const clearError = () => {
     setTimeout(() => setError(""), 10000);
@@ -101,12 +96,11 @@ function App() {
 
   // Удаление jwt из куки (выход)
   function signOut() {
-    // navigate("/");
     setPreload(true);
     MainApi.signOut()
       .then(() => {
         setLoggedIn(false);
-        setCurrentUser({})
+        setCurrentUser({});
         navigate("/");
         localStorage.clear();
       })
@@ -137,7 +131,7 @@ function App() {
   const [shortMovies, setShortMovies] = useState([]); // Короткие фильмы
   const [isChecked, setChecked] = useState(false); // Состояние чекбокса
   const [queryUser, setQueryUser] = useState(""); // Текст запроса
-  const [errorText, setErrorText] = useState(''); //
+  const [errorText, setErrorText] = useState(""); //
 
   // Фильтрация по продолжительности фильма
   function filterShortMovies(movies) {
@@ -156,16 +150,13 @@ function App() {
       );
     });
     if (moviesQuery.length === 0) {
-      setErrorText('Ничего не найдено')
+      setErrorText("Ничего не найдено");
     } else {
-      setErrorText('');
+      setErrorText("");
     }
     setQueryMovies(moviesQuery);
     setShortMovies(filterShortMovies(moviesQuery));
-    localStorage.setItem(
-      `moviesQuery`,
-      JSON.stringify(moviesQuery)
-    );
+    localStorage.setItem(`moviesQuery`, JSON.stringify(moviesQuery));
     localStorage.setItem(
       `shortMovies`,
       JSON.stringify(filterShortMovies(moviesQuery))
@@ -184,7 +175,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        setErrorText('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        setErrorText(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        );
       })
       .finally(() => setPreload(false));
   }
@@ -211,14 +204,10 @@ function App() {
           setShortMovies(localQueryMovies);
         }
         if (localStorage.getItem(`queryUser`)) {
-          const localQueryUser = localStorage.getItem(
-            `queryUser`
-          );
+          const localQueryUser = localStorage.getItem(`queryUser`);
           setQueryUser(localQueryUser);
         }
-        if (
-          localStorage.getItem(`checkbox`) === "true"
-        ) {
+        if (localStorage.getItem(`checkbox`) === "true") {
           setChecked(true);
         } else {
           setChecked(false);
@@ -249,16 +238,13 @@ function App() {
       );
     });
     if (moviesQuery.length === 0) {
-      setErrorText('Ничего не найдено')
+      setErrorText("Ничего не найдено");
     } else {
-      setErrorText('');
+      setErrorText("");
     }
     setSavedMovies(moviesQuery);
     setShortSavedMovies(filterShortMovies(moviesQuery));
-    localStorage.setItem(
-      `moviesSaved`,
-      JSON.stringify(moviesQuery)
-    );
+    localStorage.setItem(`moviesSaved`, JSON.stringify(moviesQuery));
     localStorage.setItem(
       `shortMoviesSaved`,
       JSON.stringify(filterShortMovies(moviesQuery))
@@ -267,38 +253,37 @@ function App() {
 
   // Функция вызова поиска / фильтрации
   function handleSearchSubmitSaved(inputValue) {
-    filterSavedMovies(moviesSave, inputValue)
+    filterSavedMovies(moviesSave, inputValue);
   }
 
   // Получение всех сохраненных фильмов
-  function getSavedMovies(){
+  function getSavedMovies() {
     if (loggedIn && currentUser) {
       MainApi.getSavedMovies()
-      .then((movies) => {
-        //const userMovies = movies.filter(i => i.owner === currentUser._id)
-        setMoviesSave(movies);
-        setSavedMovies(movies);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+        .then((movies) => {
+          //const userMovies = movies.filter(i => i.owner === currentUser._id)
+          setMoviesSave(movies);
+          setSavedMovies(movies);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 
   useEffect(() => {
     getSavedMovies();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn, currentUser])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn, currentUser]);
 
   // Сохранения фильмов
   function handleSaveMovie(movie) {
-    setPreload(true)
+    setPreload(true);
     MainApi.setMovie(movie)
       .then((res) => {
         // const userMovies = moviesSave.filter(i => i.owner === currentUser._id)
         setSavedMovies((savedMovies) => [...savedMovies, res]);
         setMoviesSave((savedMovies) => [...savedMovies, res]);
-
       })
       .catch((err) => {
         console.log(err);
@@ -308,7 +293,7 @@ function App() {
 
   //Удаление фильмов
   function deleteSavedMovies(movie) {
-    setPreload(true)
+    setPreload(true);
     const savedMovie = moviesSave.find(
       (item) => item.movieId === movie.id || item.movieId === movie.movieId
     );
@@ -323,80 +308,82 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route path="/" element={<Main loggedIn={loggedIn} />} />
+      <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
         <Route
           path="/signup"
           element={
-            <ProtectedRoute loggedIn={!loggedIn}>
-              <Register onRegister={userRegistration} error={error} />
-            </ProtectedRoute>
+            <ProtectedRoute
+              element={Register}
+              onRegister={userRegistration}
+              error={error}
+              loggedIn={!loggedIn}
+            ></ProtectedRoute>
           }
         ></Route>
         <Route
           path="/signin"
           element={
-            <ProtectedRoute loggedIn={!loggedIn}>
-              <Login onLogin={userLogin} />
-            </ProtectedRoute>
+            <ProtectedRoute
+              element={Login}
+              loggedIn={!loggedIn}
+              onLogin={userLogin}
+            ></ProtectedRoute>
           }
         ></Route>
         <Route
           path="/profile"
           element={
-            <ProtectedRoute loggedIn={loggedIn}>
-              <Profile
-                loggedIn={loggedIn}
-                signOut={signOut}
-                onUpdateUser={handleUpdateUser}
-              />
-            </ProtectedRoute>
+            <ProtectedRoute
+              element={Profile}
+              signOut={signOut}
+              onUpdateUser={handleUpdateUser}
+              loggedIn={loggedIn}
+            ></ProtectedRoute>
           }
         />
         <Route
           path="/movies"
           element={
-            <ProtectedRoute loggedIn={loggedIn}>
-              <Movies
-                errorText={errorText}
-                handleSaveMovie={handleSaveMovie}
-                queryUser={queryUser}
-                isChecked={isChecked}
-                isCheckedSave={isCheckedSave}
-                handleChecked={handleChecked}
-                deleteSavedMovies={deleteSavedMovies}
-                search={handleSearchSubmit}
-                queryMovies={queryMovies}
-                shortMovies={shortMovies}
-                location={true}
-                loggedIn={loggedIn}
-                moviesSave={moviesSave}
-                savedMovies={savedMovies}
-              />
-            </ProtectedRoute>
+            <ProtectedRoute
+              element={Movies}
+              errorText={errorText}
+              handleSaveMovie={handleSaveMovie}
+              queryUser={queryUser}
+              isChecked={isChecked}
+              isCheckedSave={isCheckedSave}
+              handleChecked={handleChecked}
+              deleteSavedMovies={deleteSavedMovies}
+              search={handleSearchSubmit}
+              queryMovies={queryMovies}
+              shortMovies={shortMovies}
+              location={true}
+              loggedIn={loggedIn}
+              moviesSave={moviesSave}
+              savedMovies={savedMovies}
+            ></ProtectedRoute>
           }
         />
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies
-                errorText={errorText}
-                queryUser={queryUser}
-                handleCheckedSave={handleCheckedSave}
-                savedMovies={savedMovies}
-                shortSavedMovies={shortSavedMovies}
-                searchSaved={handleSearchSubmitSaved}
-                deleteSavedMovies={deleteSavedMovies}
-                isChecked={isChecked}
-                isCheckedSave={isCheckedSave}
-                location={false}
-                loggedIn={loggedIn}
-                moviesSave={moviesSave}
-              />
-            </ProtectedRoute>
+            <ProtectedRoute
+              element={SavedMovies}
+              errorText={errorText}
+              queryUser={queryUser}
+              handleCheckedSave={handleCheckedSave}
+              savedMovies={savedMovies}
+              shortSavedMovies={shortSavedMovies}
+              searchSaved={handleSearchSubmitSaved}
+              deleteSavedMovies={deleteSavedMovies}
+              isChecked={isChecked}
+              isCheckedSave={isCheckedSave}
+              location={false}
+              loggedIn={loggedIn}
+              moviesSave={moviesSave}
+            ></ProtectedRoute>
           }
         />
-        <Route  path="*" element={<PageNotFound />}></Route>
+        <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
       <Preloader isOpen={preload} />
     </CurrentUserContext.Provider>

@@ -42,7 +42,7 @@ export default function MoviesCard({
             Сохранить
           </button>
         )} */}
-        <a className="movies-list__link" href={movie.trailerLink}>
+        <a target="_blank" className="movies-list__link" href={movie.trailerLink} rel="noreferrer">
           <img
             className="movies-list__img"
             src={movie.image.url ? url + movie.image.url : movie.image}
