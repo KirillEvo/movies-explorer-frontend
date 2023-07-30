@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesCard({
   movie,
@@ -7,6 +8,7 @@ export default function MoviesCard({
   checkingSavedMovies,
 }) {
   const url = "https://api.nomoreparties.co/";
+  const location = useLocation();
 
   const duration = (duration) => {
     const hours = Math.trunc(duration / 60);
@@ -32,9 +34,14 @@ export default function MoviesCard({
   return (
     <article className="movies-list__article">
       <div className="movies-list__card">
-        <button onClick={checkingSavedMovies ? handleDelete : handleSave} className={checkingSavedMovies ? 'movies-list__btn-saved' : 'movies-list__btn-save'}>
+        {location.pathname === '/saved-movies' ? (
+          <button onClick={handleDelete} className="movies-list__btn-deleted"></button>
+        ) : (
+          <button onClick={checkingSavedMovies ? handleDelete : handleSave} className={checkingSavedMovies ? 'movies-list__btn-saved' : 'movies-list__btn-save'}>
           {checkingSavedMovies ? '' : 'Сохранить'}
         </button>
+        )}
+
         {/* {checkingSavedMovies ? (
           <button className="movies-list__btn-saved"></button>
         ) : (

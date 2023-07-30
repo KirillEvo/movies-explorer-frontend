@@ -31,6 +31,7 @@ export default function Registe(props) {
             Имя
             <input
               required
+              placeholder="Ваше имя"
               className="sign-form__input"
               value={inputValid?.values?.name || ""}
               onChange={inputValid.handleChange}
@@ -45,17 +46,20 @@ export default function Registe(props) {
             E-mail
             <input
               required
+              placeholder="mail@mail.ru"
               className="sign-form__input"
               value={inputValid?.values?.email || ""}
               onChange={inputValid.handleChange}
               name="email"
               type="email"
+              pattern="^\w+@\w+\..+$"
             />
             <span className="sign-form__span">{email}</span>
           </label>
           <label className="sign-form__label" htmlFor="password">
             Пароль
             <input
+              placeholder="Введите пароль"
               required
               className="sign-form__input"
               value={inputValid?.values?.password || ""}

@@ -19,7 +19,8 @@ export default function SearchForm({ errorText, queryUser, shortMovies, isChecke
 
   useEffect(() => {
     if (location.pathname === '/movies') {
-      values.search = queryUser;
+      const localQueryUser = localStorage.getItem(`queryUser`);
+      values.search = localQueryUser;
       setIsValid(true);
       setSavePage(true)
     } else {
@@ -30,7 +31,7 @@ export default function SearchForm({ errorText, queryUser, shortMovies, isChecke
   }, []);
 
   useEffect(() => {
-    if (values.search.length > 0) {
+    if (values.search && values.search.length > 0)  {
       setError("");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

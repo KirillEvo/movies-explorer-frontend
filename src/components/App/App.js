@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate, useHistory, useLocation } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 
 import Main from "../Main/Main";
@@ -23,11 +23,10 @@ function App() {
   const location = useLocation();
   const path = location.pathname;
   const [currentUser, setCurrentUser] = useState({});
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [preload, setPreload] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn);
   // Проверка jwt, если приходит then значит в куки он есть
   useEffect(() => {
     MainApi.token()
@@ -40,16 +39,16 @@ function App() {
               setCurrentUser(userData);
             })
             .catch((err) => console.log(err))
-            .finally(() => setIsLoading(false));
         } else {
-          setIsLoading(false);
         }
       })
       .catch((err) => console.log(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
   // Сброс ошибок в формах
   const clearError = () => {
-    setTimeout(() => setError(""), 10000);
+    setTimeout(() => setError(''), 10000);
+    setTimeout(() => setMessage(''), 10000);
   };
 
   // Регистрация пользователя
@@ -62,7 +61,7 @@ function App() {
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(`${err}`);
+        console.log(err.status);
         setError(
           err.status === 409
             ? "Пользователь с таким email уже зарегистрирован"
@@ -88,9 +87,15 @@ function App() {
       })
       .catch((err) => {
         console.log(`${err}`);
+        setError(
+          err.status === 401
+            ? "Вы ввели неправильный логин или пароль."
+            : "При авторизации произошла ошибка."
+        );
       })
       .finally(() => {
         setPreload(false);
+        clearError();
       });
   }
 
@@ -116,12 +121,15 @@ function App() {
     MainApi.updateUserData(data)
       .then((res) => {
         setCurrentUser(res);
+        setMessage('Данные успешно измененны');
       })
       .catch((err) => {
         console.log(`${err}`);
+        setError(err.status === 409 ? 'Пользователь с таким email уже существует' : 'При обновлении профиля произошла ошибка.');
       })
       .finally(() => {
         setPreload(false);
+        clearError();
       });
   }
 
@@ -326,6 +334,7 @@ function App() {
             <ProtectedRoute
               element={Login}
               loggedIn={!loggedIn}
+              error={error}
               onLogin={userLogin}
             ></ProtectedRoute>
           }
@@ -338,6 +347,8 @@ function App() {
               signOut={signOut}
               onUpdateUser={handleUpdateUser}
               loggedIn={loggedIn}
+              error={error}
+              message={message}
             ></ProtectedRoute>
           }
         />

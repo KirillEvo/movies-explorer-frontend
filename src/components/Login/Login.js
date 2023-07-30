@@ -32,11 +32,13 @@ export default function Login(props) {
             E-mail
             <input
               required
+              placeholder="mail@mail.ru"
               className="sign-login__input"
               value={inputValid?.values?.email || ""}
               onChange={inputValid.handleChange}
               name="email"
               type="email"
+              pattern="^\w+@\w+\..+$"
             />
             <span className="sign-login__span">{email}</span>
           </label>
@@ -44,6 +46,7 @@ export default function Login(props) {
             Пароль
             <input
               required
+              placeholder="Введите пароль"
               className="sign-login__input"
               value={inputValid?.values?.password || ""}
               onChange={inputValid.handleChange}
@@ -53,7 +56,7 @@ export default function Login(props) {
             <span className="sign-login__span">{password}</span>
           </label>
         </div>
-        <span className="sign-login__height"></span>
+        <span className="sign-login__span sign-login__height">{props.error}</span>
         <button className={`sign-login__btn ${!inputValid.isValid && 'sign-login__btn_disable'}`} onClick={handleSubmit} type="submit" disabled={!inputValid.isValid && 'disabled'}>
           Войти
         </button>

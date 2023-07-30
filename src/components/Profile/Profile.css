@@ -7,6 +7,28 @@
   margin: 0 auto;
 }
 
+.profile__span-props-error {
+  padding: 10px 0;
+  text-align: center;
+  color: #FF4062;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.profile__span-props-message{
+  padding: 10px 0;
+  text-align: center;
+  color: #2BE080;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .profile__title {
   margin: 0;
   font-family: "Inter", Arial, sans-serif;
@@ -98,6 +120,11 @@
   color: #fff;
   border: 0;
   cursor: pointer;
+}
+
+.profile__btn-save_disable{
+  background-color: #2f2f2f;
+  cursor: not-allowed;
 }
 
 .profile__btn-save:hover {

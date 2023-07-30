@@ -94,7 +94,7 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status} ${res.message} ${res}`);
+    return res.ok ? res.json() : Promise.reject(res);
   }
 };
 

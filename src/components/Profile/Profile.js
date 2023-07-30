@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Header from "../Header/Header";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/hooks/validationForm";
@@ -12,6 +12,13 @@ export default function Profile(props) {
   const { name, email } = inputValid.errors;
 
   const [editingActivated, setEditingActivated] = useState(false);
+  const [isAnyFieldFilled, setIsAnyFieldFilled] = useState(false);
+
+  useEffect(() => {
+    // Проверяем, заполнено ли хотя бы одно поле
+    const isFieldFilled = inputValid.values.name || inputValid.values.email;
+    setIsAnyFieldFilled(isFieldFilled);
+  }, [inputValid.values]);
 
   const handleEditing = (evt) => {
     evt.preventDefault();
@@ -41,7 +48,6 @@ export default function Profile(props) {
                 <div className="profile__block-input">
                   <span className="profile__span">Имя</span>
                   <input
-                    required
                     className="profile__input"
                     minLength="2"
                     maxLength="30"
@@ -57,7 +63,7 @@ export default function Profile(props) {
                 <div className="profile__block-input">
                   <span className="profile__span">E-mail</span>
                   <input
-                    required
+
                     className="profile__input profile__input_border"
                     disabled={!editingActivated && "disabled"}
                     placeholder={currentUser.email}
@@ -65,14 +71,23 @@ export default function Profile(props) {
                     onChange={inputValid.handleChange}
                     type="email"
                     name="email"
+                    pattern="^\w+@\w+\..+$"
                   ></input>
                   <span className="profile__span-error">{email}</span>
                 </div>
               </div>
+              <span className="profile__span-props-message">{props.message}</span>
+              <span className="profile__span-props-error">{props.error}</span>
               {editingActivated ? (
-                <button className="profile__btn-save" onClick={handleSubmit}>
-                  Сохранить
-                </button>
+                <button
+              className={`profile__btn-save ${
+                (!inputValid.isValid || !isAnyFieldFilled) && 'profile__btn-save_disable'
+              }`}
+              onClick={handleSubmit}
+              disabled={!inputValid.isValid || !isAnyFieldFilled}
+            >
+              Сохранить
+            </button>
               ) : (
                 <div className="profile__bottom-block">
                   <button
