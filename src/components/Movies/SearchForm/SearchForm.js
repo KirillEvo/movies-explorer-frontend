@@ -12,12 +12,11 @@ export default function SearchForm({ errorText, queryUser, shortMovies, isChecke
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(isValid);
     isValid
       ? (savePage ? search(values.search) : searchSaved(values.search))
       : setError("Нужно ввести ключевое слово");
   };
-  console.log(errorText);
+
   useEffect(() => {
     if (location.pathname === '/movies') {
       values.search = queryUser;

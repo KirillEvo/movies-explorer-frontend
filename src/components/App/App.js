@@ -21,7 +21,7 @@ import Preloader from "../Preloader/Preloader";
 function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
   const [error, setError] = useState("");
   const [preload, setPreload] = useState(false);
 
@@ -41,9 +41,8 @@ function App() {
   // Если токен есть - получаем данные пользователя
   useEffect(() => {
     if (loggedIn) {
-      Promise.all([MainApi.getUserInfo()])
-        .then((values) => {
-          const [userData] = values;
+      MainApi.getUserInfo()
+        .then((userData) => {
           setCurrentUser(userData);
         })
         .catch((err) => console.log(err));
@@ -60,7 +59,6 @@ function App() {
     setPreload(true);
     MainApi.register(data.name, data.email, data.password)
       .then((data) => {
-        console.log(data);
         navigate("/signin", { replace: true });
       })
       .catch((err) => {
@@ -83,7 +81,6 @@ function App() {
     MainApi.login(dataUser.email, dataUser.password)
       .then((data) => {
         if (data) {
-          console.log(data);
           setLoggedIn(true);
           navigate("/", { replace: true });
         }
@@ -134,6 +131,7 @@ function App() {
   const [isChecked, setChecked] = useState(false); // Состояние чекбокса
   const [queryUser, setQueryUser] = useState(""); // Текст запроса
   const [errorText, setErrorText] = useState(''); //
+
   // Фильтрация по продолжительности фильма
   function filterShortMovies(movies) {
     return movies.filter((movie) => movie.duration < 40);
@@ -233,7 +231,6 @@ function App() {
     setIsChekedSave(value);
     localStorage.setItem(`${currentUser.email} - checkboxSave`, value);
   }
-
   // Фильтрация фильмов из моего апи
   function filterSavedMovies(movies, query) {
     const moviesQuery = movies.filter((movie) => {
@@ -271,9 +268,9 @@ function App() {
     if (loggedIn && currentUser) {
       MainApi.getSavedMovies()
       .then((movies) => {
-        const userMovies = movies.filter(i => i.owner === currentUser._id)
-        setMoviesSave(userMovies);
-        setSavedMovies(userMovies);
+        //const userMovies = movies.filter(i => i.owner === currentUser._id)
+        setMoviesSave(movies);
+        setSavedMovies(movies);
       })
       .catch((err) => {
         console.log(err)
@@ -311,7 +308,6 @@ function App() {
     MainApi.delMovie(savedMovie._id)
       .then(() => {
         getSavedMovies();
-        console.log('Удалилась')
       })
       .catch((err) => console.log(err))
       .finally(() => setPreload(false));

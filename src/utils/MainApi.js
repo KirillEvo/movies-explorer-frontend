@@ -1,4 +1,4 @@
-const apiUrl = 'https://api.nomoreparties.co';
+// const apiUrl = 'https://api.nomoreparties.co';
 
 class MainApi {
   constructor(options) {
@@ -75,9 +75,9 @@ class MainApi {
         duration : data.duration,
         year : data.year,
         description : data.description,
-        image : apiUrl + data.image.url,
+        image : `https://api.nomoreparties.co${data.image.url}`,
         trailerLink : data.trailerLink,
-        thumbnail : apiUrl + data.image.formats.thumbnail.url,
+        thumbnail : `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
         movieId : data.id,
         nameRU : data.nameRU,
         nameEN : data.nameEN,
@@ -94,13 +94,13 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status} ${res.message} ${res}`);
   }
 };
 
 const api = new MainApi({
-  // baseUrl: 'https://api.dip.nomoredomains.xyz',
-  baseUrl: 'http://localhost:4444',
+  baseUrl: 'https://api.dip.nomoredomains.xyz',
+  // baseUrl: 'http://localhost:4444',
   headers: {
     'Content-Type': 'application/json'
   }
