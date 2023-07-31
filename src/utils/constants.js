@@ -22,4 +22,6 @@ const screenWidth = {
   }
 }
 
-export { screenWidth };
+const shortDuration = 40;
+
+export { screenWidth, shortDuration };

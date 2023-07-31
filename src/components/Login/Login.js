@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../utils/hooks/validationForm";
 import { Link } from "react-router-dom";
@@ -8,14 +8,24 @@ export default function Login(props) {
   const inputValid = useFormWithValidation();
   const { email, password } = inputValid.errors;
 
-  const handleSubmit = (evt) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     const { email, password } = inputValid.values;
-    props.onLogin({
-      email: email,
-      password: password
-    })
-    inputValid.resetForm();
+
+    try {
+      setIsSubmitting(true);
+      await props.onLogin({
+        email: email,
+        password: password
+      });
+      inputValid.resetForm();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,7 +67,7 @@ export default function Login(props) {
           </label>
         </div>
         <span className="sign-login__span sign-login__height">{props.error}</span>
-        <button className={`sign-login__btn ${!inputValid.isValid && 'sign-login__btn_disable'}`} onClick={handleSubmit} type="submit" disabled={!inputValid.isValid && 'disabled'}>
+        <button className={`sign-login__btn ${!inputValid.isValid && 'sign-login__btn_disable'}`} onClick={handleSubmit} type="submit" disabled={!inputValid.isValid || isSubmitting}>
           Войти
         </button>
         <div className="sign-login__bottom">

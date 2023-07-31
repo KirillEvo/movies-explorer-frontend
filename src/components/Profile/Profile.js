@@ -12,18 +12,19 @@ export default function Profile(props) {
   const { name, email } = inputValid.errors;
 
   const [editingActivated, setEditingActivated] = useState(false);
-  // const [isAnyFieldFilled, setIsAnyFieldFilled] = useState(false);
-
-  // useEffect(() => {
-  //   // Проверяем, заполнено ли хотя бы одно поле
-  //   const isFieldFilled = inputValid.values.name || inputValid.values.email;
-  //   setIsAnyFieldFilled(isFieldFilled);
-  // }, [inputValid.values]);
 
   const handleEditing = (evt) => {
     evt.preventDefault();
     setEditingActivated(true);
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      inputValid.values.name = currentUser.name;
+      inputValid.values.email = currentUser.email;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -55,7 +56,7 @@ export default function Profile(props) {
                     maxLength="30"
                     disabled={!editingActivated && "disabled"}
                     placeholder={currentUser.name}
-                    value={inputValid?.values?.name || ""}
+                    value={inputValid?.values?.name || ''}
                     onChange={inputValid.handleChange}
                     type="text"
                     name="name"
@@ -69,7 +70,7 @@ export default function Profile(props) {
                     className="profile__input profile__input_border"
                     disabled={!editingActivated && "disabled"}
                     placeholder={currentUser.email}
-                    value={inputValid?.values?.email || ""}
+                    value={inputValid?.values?.email || ''}
                     onChange={inputValid.handleChange}
                     type="email"
                     name="email"

@@ -18,6 +18,8 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 
 import Preloader from "../Preloader/Preloader";
 
+import { shortDuration } from "../../utils/constants";
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -97,7 +99,7 @@ function App() {
       });
   }
 
-  // Удаление jwt из куки (выход)
+  // Удаление jwt из куки, данных из сейт и localStorage(выход)
   function signOut() {
     setPreload(true);
     MainApi.signOut()
@@ -138,10 +140,9 @@ function App() {
   const [isChecked, setChecked] = useState(false); // Состояние чекбокса
   const [queryUser, setQueryUser] = useState(""); // Текст запроса
   const [errorText, setErrorText] = useState(""); //
-
   // Фильтрация по продолжительности фильма
   function filterShortMovies(movies) {
-    return movies.filter((movie) => movie.duration < 40);
+    return movies.filter((movie) => movie.duration < shortDuration);
   }
 
   // Фильтрация фильмов
