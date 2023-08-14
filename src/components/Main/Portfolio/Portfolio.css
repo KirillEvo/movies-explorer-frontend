@@ -1,0 +1,133 @@
+.portfolio {
+  background-color: #fff;
+  padding-bottom: 50px;
+}
+
+.portfolio__container {
+  padding-left: 14px;
+  padding-right: 14px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.portfolio__title {
+  color: #A0A0A0;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  padding-bottom: 42px;
+}
+
+.portfolio__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.portfolio__item {
+  margin-bottom: 22px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.portfolio__item:last-of-type {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.portfolio__link {
+  color: #000;
+  display: flex;
+  text-decoration: none;
+  justify-content: space-between;
+  font-size: 18px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  line-height: 28px;
+  font-weight: 400;
+  letter-spacing: -0.72px;
+  padding-bottom: 17px;
+}
+
+.portfolio__link-p {
+  margin: 0;
+}
+
+.portfolio__link-p_line {
+  line-height: 28px;
+  width: 18px;
+}
+
+.portfolio__link-arrow.css {
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  .portfolio {
+    padding-bottom: 69px;
+  }
+  .portfolio__container {
+    max-width: 540px;
+  }
+  .portfolio__link-p {
+    line-height: 50px;
+    font-size: 28px;
+  }
+  .portfolio__link-p_line {
+    line-height: 60px;
+    width: 27px;
+  }
+  .portfolio__link {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+    padding-bottom: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .portfolio__container {
+    max-width: 668px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .portfolio__title {
+    font-size: 18px;
+    padding-bottom: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .portfolio__container {
+    max-width: 960px;
+  }
+  .portfolio__link {
+    font-size: 30px;
+    letter-spacing: -1.2px;
+    padding-bottom: 8px;
+  }
+  .portfolio {
+    padding-bottom: 106px;
+  }
+  .portfolio__link-p {
+    line-height: 50px;
+    font-size: 30px;
+  }
+  .portfolio__link-p_line {
+    line-height: 60px;
+    font-size: 30px;
+    width: 29px;
+  }
+  .portfolio__item {
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .portfolio__container {
+    max-width: 1140px;
+  }
+}

@@ -1,0 +1,148 @@
+.promo {
+  background-color: #F3C1F8;
+}
+
+.promo__container {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+}
+
+.promo__title {
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 38px;
+  margin: 0;
+  padding-bottom: 24px;
+  text-align: center;
+  letter-spacing: -1.2px;
+}
+
+.promo__text-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  order: 1;
+  align-items: center;
+}
+
+.promo__paragraph {
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.5;
+  margin: 0;
+  max-width: 260px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+.promo__link {
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, .6);
+  padding: 10px 19px;
+  text-decoration: none;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.promo__img {
+  width: 210px;
+  height: 206px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 550px) {
+  .promo__title {
+    font-size: 40px;
+    line-height: 50px;
+    padding-bottom: 22px;
+    text-align: center;
+    letter-spacing: 0px;
+  }
+  .promo__text-block {
+    order: 1;
+  }
+  .promo__paragraph {
+    padding-bottom: 92px;
+  }
+  .promo__img {
+    order: 0;
+    width: 310px;
+    height: 304px;
+  }
+}
+
+@media (min-width: 576px) {
+  .promo__container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .promo__container {
+    max-width: 668px;
+    padding-top: 140px;
+    padding-bottom: 76px;
+    gap: 48px;
+  }
+}
+
+@media (min-width: 992px) {
+  .promo__container {
+    max-width: 960px;
+    gap: 190px;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .promo__title {
+    font-size: 50px;
+    padding-bottom: 36px;
+    line-height: 58px;
+    text-align: left;
+  }
+  .promo__text-block {
+    order: 0;
+    align-items: flex-start;
+  }
+  .promo__paragraph {
+    padding-bottom: 147px;
+    text-align: left;
+    max-width: 310px;
+  }
+  .promo__link {
+    align-self: flex-start;
+  }
+  .promo__img {
+    order: 1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .promo__container {
+    max-width: 1140px;
+    padding: 75px 0;
+  }
+}

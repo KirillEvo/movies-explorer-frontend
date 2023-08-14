@@ -1,0 +1,165 @@
+.sign-login {
+  min-height: 100vh;
+}
+
+.sign-login__container {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh; */
+  max-width: 396px;
+  margin: 0 auto;
+  padding: 56px 30px 30px 30px;
+}
+
+.sign-login__block-input {
+  padding-bottom: 230px;
+}
+
+.sign-login__title {
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+
+.sign-login__label {
+  display: flex;
+  flex-direction: column;
+  color: #a0a0a0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sign-login__input {
+  border-radius: 8px;
+  border: 0;
+  background: #f9f9f9;
+  flex-shrink: 0;
+  color: #000;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 15px;
+}
+
+.sign-login__input:focus {
+  outline: none;
+}
+
+.sign-login__span {
+  color: #FF4062;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sign-login__btn {
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  border: 0;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.sign-login__btn_disable {
+  background-color: #2f2f2f;
+  cursor: not-allowed;
+}
+
+.sign-login__height {
+  margin: auto 0 0;
+  text-align: center;
+}
+
+.sign-login__top {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 46px;
+  padding-bottom: 80px;
+}
+
+.sign-login__bottom {
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+}
+
+.sign-login__bottom-text {
+  margin: 0;
+  color: #a0a0a0;
+  text-align: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sign-login__bottom-link {
+  color: #000;
+  text-align: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .sign-login__container {
+    padding-top: 232px;
+    padding-bottom: 232px;
+    max-width: 456px;
+  }
+  .sign-login__btn {
+    font-size: 14px;
+  }
+  .sign-login__top {
+    align-items: flex-start;
+    padding-bottom: 40px;
+    gap: 36px;
+  }
+  .sign-login__bottom {
+    gap: 6px;
+  }
+  .sign-login__bottom-text {
+    font-size: 14px;
+  }
+  .sign-login__bottom-link {
+    font-size: 14px;
+  }
+  .sign-login__block-input {
+    padding-bottom: 142px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sign-login__container {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}

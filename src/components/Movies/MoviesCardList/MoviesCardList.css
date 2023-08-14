@@ -1,0 +1,229 @@
+.movies-list {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movies-list__content {
+  width: 100%;
+  padding-top: 48px;
+  padding-bottom: 63px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 38px;
+}
+
+.movies-list__article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movies-list__card {
+  position: relative;
+  display: flex;
+}
+
+.movies-list__card:hover .movies-list__btn-save {
+  opacity: 1;
+}
+
+.movies-list__link {
+  width: 100%;
+}
+
+.movies-list__btn-save {
+  opacity: 0;
+  font-family: "Inter", Arial, sans-serif;
+  cursor: pointer;
+  top: 14px;
+  right: 14px;
+  border-radius: 30px;
+  border: 0;
+  position: absolute;
+  height: 21px;
+  flex-shrink: 0;
+  background: #f9f9f9;
+  color: #000;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 9px;
+}
+
+.movies-list__btn-save:hover {
+  opacity: 0.5;
+}
+
+.movies-list__btn-saved {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 21px;
+  height: 21px;
+  background-image: url("../../../images/saved.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ff4062;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.movies-list__card:hover .movies-list__btn-deleted {
+  opacity: 1;
+}
+.movies-list__btn-deleted {
+  opacity: 0;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 21px;
+  height: 21px;
+  background-image: url("../../../images/cls.svg");
+  background-color: #f9f9f9;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.movies-list__btn-deleted
+
+.movies-list__btn-saved:hover {
+  background-image: url("../../../images/cls.svg");
+  background-color: #f9f9f9;
+}
+
+.movies-list__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movies-list__text {
+  font-family: "Inter", Arial, sans-serif;
+  margin: 0;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.movies-list__hours {
+  padding: 3px 9px;
+  background: #f9f9f9;
+  border-radius: 3px;
+  color: #a0a0a0;
+  font-family: "Inter", Arial, sans-serif;
+  margin: 0;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+}
+
+.movies-list__more {
+  cursor: pointer;
+  height: 36px;
+  border: 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 6px;
+  background: #f9f9f9;
+  margin-bottom: 78px;
+  width: 240px;
+}
+
+.movies-list__more:hover {
+  opacity: 0.5;
+}
+
+.movies-list__img {
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+}
+.movies-list__content_saved {
+  padding-bottom: 152px;
+}
+
+@media (min-width: 576px) {
+  .movies-list {
+    max-width: 540px;
+    padding: 0;
+  }
+  .movies-list__text {
+    font-size: 13px;
+  }
+  .movies-list__more {
+    width: 320px;
+  }
+}
+
+@media (min-width: 768px) {
+  .movies-list {
+    max-width: 708px;
+    padding: 0;
+  }
+  .movies-list__content {
+    padding-top: 80px;
+    padding-bottom: 29px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 47px 30px;
+  }
+  .movies-list__article {
+    gap: 21px;
+  }
+  .movies-list__info {
+    padding: 0px;
+  }
+  .movies-list__more {
+    margin-top: 34px;
+  }
+  .movies-list__content_saved {
+    padding-bottom: 175px;
+  }
+  .movies-list__img {
+    height: 190px;
+  }
+}
+
+@media (min-width: 992px) {
+  .movies-list {
+    max-width: 960px;
+    padding: 0;
+  }
+  .movies-list__content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 59px 30px;
+  }
+  .movies-list__article {
+    gap: 10px;
+  }
+  .movies-list__info {
+    padding: 0 14px;
+  }
+  .movies-list__more {
+    margin-top: 48px;
+  }
+  .movies-list__content_saved {
+    padding-bottom: 240px;
+  }
+  .movies-list__img {
+    height: 201px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .movies-list {
+    max-width: 1140px;
+    padding: 0;
+  }
+}
